@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.lesson_planner import create_lesson_plan
+from app.models import LessonPlanRequest
 
 app = FastAPI()
 
@@ -11,12 +12,12 @@ def home():
     }
 
 
-@app.get("/lesson-plan")
-def lesson_plan():
+@app.post("/lesson-plan")
+def lesson_plan(request: LessonPlanRequest):
     return create_lesson_plan(
-        topic="Photosynthesis",
-        learner_level="Beginner",
-        learning_objective="Understand the basic process of photosynthesis",
-        language="English",
-        available_minutes=20,
+        topic=request.topic,
+        learner_level=request.learner_level,
+        learning_objective=request.learning_objective,
+        language=request.language,
+        available_minutes=request.available_minutes,
     )
