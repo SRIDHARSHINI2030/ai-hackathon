@@ -5,6 +5,7 @@ from app.models import LessonPlanRequest
 from app.adaptive_service import decide_next_action
 from app.adaptive_response_service import generate_adaptive_response
 from app.next_question_service import generate_next_question
+from app.session_memory import learning_session
 from app.evaluation_models import EvaluationRequest
 from app.evaluation_service import evaluate_learner_answer
 from app.material_router import router as material_router
