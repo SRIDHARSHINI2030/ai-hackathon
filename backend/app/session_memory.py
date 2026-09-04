@@ -58,12 +58,16 @@ class LearningSession:
                 correct_count += 1
 
         if total_interactions > 0:
-            progress_percentage = round(
-                (correct_count / total_interactions) * 100
-            )
+          progress_percentage = round(
+        (
+            correct_count
+            + (partially_correct_count * 0.5)
+        )
+        / total_interactions
+        * 100
+        )
         else:
-            progress_percentage = 0
-
+           progress_percentage = 0
         return {
             "topic": self.topic,
             "learner_level": self.learner_level,
