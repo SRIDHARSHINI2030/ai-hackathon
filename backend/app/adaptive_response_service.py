@@ -1,4 +1,5 @@
 from app.gemini_service import generate_response
+from app.session_memory import learning_session
 
 
 def generate_adaptive_response(
@@ -8,6 +9,10 @@ def generate_adaptive_response(
     next_action: dict,
     sources: list[dict],
 ) -> str:
+    learner_level = learning_session.learner_level
+    language = learning_session.language
+    available_minutes = learning_session.available_minutes
+    learning_objective = learning_session.learning_objective
     context = "\n\n".join(
         f"Source {index}: {item['text']}"
         for index, item in enumerate(sources, start=1)
@@ -37,6 +42,11 @@ Learning material:
 {context}
 
 Now continue teaching the learner.
+Learner profile:
+- Level: {learner_level}
+- Language: {language}
+- Available time: {available_minutes} minutes
+- Learning objective: {learning_objective}
 
 If the answer was incorrect, re-explain the concept simply and ask one new basic question.
 
