@@ -41,14 +41,39 @@ class LearningSession:
         return self.history
 
     def get_session_summary(self) -> dict:
+        total_interactions = len(self.history)
+
+        correct_count = 0
+        partially_correct_count = 0
+        incorrect_count = 0
+
+        for interaction in self.history:
+            evaluation = interaction["evaluation"].lower()
+
+            if "partially correct" in evaluation:
+                partially_correct_count += 1
+            elif "incorrect" in evaluation:
+                incorrect_count += 1
+            elif "correct" in evaluation:
+                correct_count += 1
+
+        if total_interactions > 0:
+            progress_percentage = round(
+                (correct_count / total_interactions) * 100
+            )
+        else:
+            progress_percentage = 0
+
         return {
             "topic": self.topic,
             "learner_level": self.learner_level,
             "learning_objective": self.learning_objective,
             "language": self.language,
             "available_minutes": self.available_minutes,
-            "interaction_count": len(self.history),
+            "interaction_count": total_interactions,
+            "correct_count": correct_count,
+            "partially_correct_count": partially_correct_count,
+            "incorrect_count": incorrect_count,
+            "progress_percentage": progress_percentage,
         }
-
-
 learning_session = LearningSession()
