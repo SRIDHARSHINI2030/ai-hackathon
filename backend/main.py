@@ -72,6 +72,12 @@ def adaptive_teach(request: EvaluationRequest):
         next_action=next_action,
         sources=evaluation_result["sources"],
     )
+    learning_session.add_interaction(
+    question=request.question,
+    learner_answer=request.learner_answer,
+    evaluation=evaluation_result["evaluation"],
+    next_action=next_action,
+    )
 
     return {
         "evaluation": evaluation_result["evaluation"],
