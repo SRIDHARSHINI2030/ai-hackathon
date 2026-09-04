@@ -88,6 +88,19 @@ def adaptive_teach(request: EvaluationRequest):
     }
 
 
+@app.post("/session")
+def start_learning_session(request: LessonPlanRequest):
+    learning_session.start_session(
+        topic=request.topic,
+        learner_level=request.learner_level,
+        learning_objective=request.learning_objective,
+        language=request.language,
+        available_minutes=request.available_minutes,
+    )
+
+    return learning_session.get_session_summary()
+
+
 @app.get("/session")
 def get_session():
     return learning_session.get_session_summary()
