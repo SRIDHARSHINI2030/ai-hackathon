@@ -86,3 +86,8 @@ def adaptive_teach(request: EvaluationRequest):
         "next_question": next_question,
         "sources": evaluation_result["sources"],
     }
+
+
+@app.get("/session")
+def get_session():
+    return learning_session.get_session_summary()
