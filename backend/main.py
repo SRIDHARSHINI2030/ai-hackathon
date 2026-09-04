@@ -4,6 +4,7 @@ from app.lesson_planner import create_lesson_plan
 from app.models import LessonPlanRequest
 from app.adaptive_service import decide_next_action
 from app.adaptive_response_service import generate_adaptive_response
+from app.next_question_service import generate_next_question
 from app.evaluation_models import EvaluationRequest
 from app.evaluation_service import evaluate_learner_answer
 from app.material_router import router as material_router
@@ -63,9 +64,18 @@ def adaptive_teach(request: EvaluationRequest):
         sources=evaluation_result["sources"],
     )
 
+    next_question = generate_next_question(
+        question=request.question,
+        learner_answer=request.learner_answer,
+        evaluation=evaluation_result["evaluation"],
+        next_action=next_action,
+        sources=evaluation_result["sources"],
+    )
+
     return {
         "evaluation": evaluation_result["evaluation"],
         "next_action": next_action,
         "adaptive_response": adaptive_response,
+        "next_question": next_question,
         "sources": evaluation_result["sources"],
     }
