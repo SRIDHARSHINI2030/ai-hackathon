@@ -1,4 +1,5 @@
 from app.gemini_service import generate_response
+from app.session_memory import learning_session
 
 
 def generate_next_question(
@@ -8,6 +9,9 @@ def generate_next_question(
     next_action: dict,
     sources: list[dict],
 ) -> str:
+    learner_level = learning_session.learner_level
+    language = learning_session.language
+    learning_objective = learning_session.learning_objective
     context = "\n\n".join(
         f"Source {index}: {item['text']}"
         for index, item in enumerate(sources, start=1)
@@ -32,6 +36,10 @@ Teaching decision:
 
 Learning material:
 {context}
+Learner profile:
+- Level: {learner_level}
+- Language: {language}
+- Learning objective: {learning_objective}
 
 Generate exactly ONE new question for the learner.
 
