@@ -221,10 +221,10 @@ def generate_video_from_backend_lesson_plan(
 
 if __name__ == "__main__":
     demo_lesson_plan = {
-        "topic": "Matrix Addition in Java",
+        "topic": "Photosynthesis",
         "learner_level": "beginner",
         "learning_objective": (
-            "Understand how matrix addition works using arrays in Java"
+            "Understand how photosynthesis works step by step"
         ),
         "language": "English",
         "available_minutes": 10,
