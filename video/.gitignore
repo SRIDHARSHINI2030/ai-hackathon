@@ -1,0 +1,8 @@
+__pycache__/
+generated_audio/
+generated_slides/
+test_*.png
+test_*.mp3
+test_*.mp4
+lesson_video.mp4
+video_generator_backup.py
